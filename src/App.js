@@ -42,19 +42,13 @@ function App() {
           </span>
           <ul class="filters">
             <li>
-              <a class="all selected" href="##">
-                전체보기
-              </a>
+              <span class="all selected">전체보기</span>
             </li>
             <li>
-              <a class="active" href="#active">
-                해야할 일
-              </a>
+              <span class="active">해야할 일</span>
             </li>
             <li>
-              <a class="completed" href="#completed">
-                완료한 일
-              </a>
+              <span class="completed">완료한 일</span>
             </li>
           </ul>
         </div>
