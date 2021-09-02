@@ -1,3 +1,4 @@
+import { inject, observer } from "mobx-react";
 import { KEY } from "../constants";
 
 const TodoInput = ({ addTodo }) => {
@@ -5,6 +6,7 @@ const TodoInput = ({ addTodo }) => {
     if (key === KEY.ENTER) {
       const contents = target.value;
       addTodo(contents);
+      target.value = "";
     }
   };
 
@@ -19,4 +21,6 @@ const TodoInput = ({ addTodo }) => {
   );
 };
 
-export default TodoInput;
+export default inject(({ todo }) => ({ addTodo: todo.addTodo }))(
+  observer(TodoInput)
+);

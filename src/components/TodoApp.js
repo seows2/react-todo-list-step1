@@ -1,13 +1,13 @@
 import { inject, observer } from "mobx-react";
 import TodoInput from "./TodoInput";
+import TodoItemList from "./TodoItemList";
 
-const todoApp = ({ todo }) => {
-  const { addTodo } = todo;
-
+const todoApp = () => {
   return (
     <div className="todoapp">
       <h1>TODOS</h1>
-      <TodoInput addTodo={addTodo} />
+      <TodoInput />
+      <TodoItemList />
     </div>
   );
 };
@@ -59,4 +59,4 @@ const todoApp = ({ todo }) => {
       </div>
     </main>
 */
-export default inject("todo")(observer(todoApp));
+export default todoApp;

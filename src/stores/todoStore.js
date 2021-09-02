@@ -17,7 +17,6 @@ class todoStore {
       contents,
       completed: false,
     });
-    console.log(this.todos);
   }
 
   @action

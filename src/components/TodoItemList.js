@@ -1,20 +1,16 @@
-const items = [
-  {
-    contents: "생수",
-    price: 850,
-  },
-  {
-    contents: "신라면",
-    price: 900,
-  },
-  {
-    contents: "포카칩",
-    price: 1500,
-  },
-  {
-    contents: "새우깡",
-    price: 1000,
-  },
-];
+import { inject, observer } from "mobx-react";
+import TodoItem from "./TodoItem";
 
-const TodoItemList = () => {};
+const TodoItemList = ({ todos }) => {
+  return (
+    <ul id="todo-list" className="todo-list">
+      {todos.map(({ id, contents, completed }) => (
+        <TodoItem key={id} contents={contents} completed={completed} />
+      ))}
+    </ul>
+  );
+};
+
+export default inject(({ todo }) => ({ todos: todo.todos }))(
+  observer(TodoItemList)
+);
