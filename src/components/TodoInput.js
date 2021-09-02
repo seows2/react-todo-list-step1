@@ -1,4 +1,4 @@
-import { inject, observer } from "mobx-react";
+import { observer } from "mobx-react";
 import { KEY } from "../constants";
 
 const TodoInput = ({ addTodo }) => {
@@ -21,6 +21,4 @@ const TodoInput = ({ addTodo }) => {
   );
 };
 
-export default inject(({ todo }) => ({ addTodo: todo.addTodo }))(
-  observer(TodoInput)
-);
+export default observer(TodoInput);

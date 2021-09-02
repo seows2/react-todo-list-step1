@@ -1,13 +1,18 @@
-import { inject, observer } from "mobx-react";
+import { inject } from "mobx-react";
 import TodoInput from "./TodoInput";
 import TodoItemList from "./TodoItemList";
 
-const todoApp = () => {
+const todoApp = ({ todoStore, viewStore }) => {
+  const { addTodo } = todoStore;
+  const { todoFilter } = viewStore;
   return (
     <div className="todoapp">
       <h1>TODOS</h1>
-      <TodoInput />
-      <TodoItemList />
+      <TodoInput addTodo={addTodo} />
+      <main>
+        <input className="toggle-all" type="checkbox" />
+        <TodoItemList todoStore={todoStore} todoFilter={todoFilter} />
+      </main>
     </div>
   );
 };
@@ -59,4 +64,4 @@ const todoApp = () => {
       </div>
     </main>
 */
-export default todoApp;
+export default inject("todoStore", "viewStore")(todoApp);

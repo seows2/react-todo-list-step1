@@ -1,16 +1,31 @@
-import { inject, observer } from "mobx-react";
+import { observer } from "mobx-react";
+import { FILTER } from "../constants";
 import TodoItem from "./TodoItem";
 
-const TodoItemList = ({ todos }) => {
+const TodoItemList = ({ todoStore, todoFilter }) => {
+  const { todos, removeTodo, toggleTodo } = todoStore;
+
+  const getVisibleTodos = () =>
+    todos.filter((todo) => {
+      return {
+        [FILTER.ACTIVE]: !todo.completed,
+        [FILTER.COMPLETED]: todo.completed,
+        [FILTER.ALL]: true,
+      }[todoFilter];
+    });
+
   return (
     <ul id="todo-list" className="todo-list">
-      {todos.map(({ id, contents, completed }) => (
-        <TodoItem key={id} contents={contents} completed={completed} />
+      {getVisibleTodos().map((todo) => (
+        <TodoItem
+          key={todo.id}
+          {...todo}
+          removeTodo={removeTodo}
+          toggleTodo={toggleTodo}
+        />
       ))}
     </ul>
   );
 };
 
-export default inject(({ todo }) => ({ todos: todo.todos }))(
-  observer(TodoItemList)
-);
+export default observer(TodoItemList);

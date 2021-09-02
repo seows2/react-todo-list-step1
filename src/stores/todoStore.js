@@ -6,23 +6,27 @@ class todoStore {
 
   constructor() {
     makeObservable(this);
-
-    this.addTodo = this.addTodo.bind(this);
   }
 
   @action
-  addTodo(contents) {
+  addTodo = (contents) => {
     this.todos.push({
       id: Date.now(),
       contents,
       completed: false,
     });
-  }
+  };
 
   @action
-  removeTodo(id) {
+  toggleTodo = (id) => {
+    const target = this.todos.find((todo) => todo.id === id);
+    target["completed"] = !target["completed"];
+  };
+
+  @action
+  removeTodo = (id) => {
     this.todos = this.todos.filter((todo) => todo.id !== id);
-  }
+  };
 }
 
 export default todoStore;
