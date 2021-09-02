@@ -3,7 +3,7 @@ import { FILTER } from "../constants";
 import TodoItem from "./TodoItem";
 
 const TodoItemList = ({ todoStore, todoFilter }) => {
-  const { todos, removeTodo, toggleTodo } = todoStore;
+  const { todos, removeTodo, toggleTodo, editTodoContent } = todoStore;
 
   const getVisibleTodos = () =>
     todos.filter((todo) => {
@@ -22,6 +22,7 @@ const TodoItemList = ({ todoStore, todoFilter }) => {
           {...todo}
           removeTodo={removeTodo}
           toggleTodo={toggleTodo}
+          editTodoContent={editTodoContent}
         />
       ))}
     </ul>

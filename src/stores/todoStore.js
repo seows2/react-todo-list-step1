@@ -1,4 +1,5 @@
 import { action, makeObservable, observable } from "mobx";
+import { TODO_PROPERTY } from "../constants";
 
 class todoStore {
   @observable
@@ -18,9 +19,15 @@ class todoStore {
   };
 
   @action
+  editTodoContent = (id, contents) => {
+    const target = this.todos.find((todo) => todo.id === id);
+    target[TODO_PROPERTY.CONTENTS] = contents;
+  };
+
+  @action
   toggleTodo = (id) => {
     const target = this.todos.find((todo) => todo.id === id);
-    target["completed"] = !target["completed"];
+    target[TODO_PROPERTY.COMPLETED] = !target[TODO_PROPERTY.COMPLETED];
   };
 
   @action

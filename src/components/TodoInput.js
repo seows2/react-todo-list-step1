@@ -4,7 +4,11 @@ import { KEY } from "../constants";
 const TodoInput = ({ addTodo }) => {
   const handleKeyDown = ({ key, target }) => {
     if (key === KEY.ENTER) {
-      const contents = target.value;
+      const contents = target.value.trim();
+      if (contents === "") {
+        return (target.value = "");
+      }
+
       addTodo(contents);
       target.value = "";
     }

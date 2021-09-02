@@ -1,4 +1,5 @@
 import { inject } from "mobx-react";
+import TodoFooter from "./TodoFooter";
 import TodoInput from "./TodoInput";
 import TodoItemList from "./TodoItemList";
 
@@ -12,6 +13,7 @@ const todoApp = ({ todoStore, viewStore }) => {
       <main>
         <input className="toggle-all" type="checkbox" />
         <TodoItemList todoStore={todoStore} todoFilter={todoFilter} />
+        <TodoFooter />
       </main>
     </div>
   );
