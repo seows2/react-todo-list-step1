@@ -1,17 +1,19 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import TodoList from './component/TodoList.jsx';
 import CountContainer from './component/CountContainer.jsx';
+import {Enter} from './config.js';
 
 function App() {
   const [todoTitle, setTodoTitle] = useState('');
   const [todoList, setTodoList] = useState([]);
 
   const onKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === Enter) {
       setTodoList([...todoList, {
         id: Date.now(),
         title: todoTitle,
-        completed: false
+        completed: false,
+        selected: 'ALL',
       }]);
 
       setTodoTitle('');
@@ -41,7 +43,7 @@ function App() {
       <main>
         <input className="toggle-all" type="checkbox" />
         <TodoList todoList={todoList} onTodoListChange={onTodoListChange}/>
-        <CountContainer/>
+        <CountContainer todoList={todoList} onTodoListChange={onTodoListChange}/>
       </main>
     </div>
   );
