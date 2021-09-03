@@ -1,13 +1,11 @@
-import { observer } from "mobx-react";
 import { KEY } from "../constants";
 
 const TodoInput = ({ addTodo }) => {
   const handleKeyDown = ({ key, target }) => {
     if (key === KEY.ENTER) {
       const contents = target.value.trim();
-      if (contents === "") {
-        return (target.value = "");
-      }
+
+      if (contents.length <= 0) return (target.value = "");
 
       addTodo(contents);
       target.value = "";
@@ -25,4 +23,4 @@ const TodoInput = ({ addTodo }) => {
   );
 };
 
-export default observer(TodoInput);
+export default TodoInput;

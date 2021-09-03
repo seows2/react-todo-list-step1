@@ -1,4 +1,4 @@
-import { makeObservable, observable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 import { FILTER } from "../constants";
 
 class viewStore {
@@ -7,6 +7,11 @@ class viewStore {
   constructor() {
     makeObservable(this);
   }
+
+  @action
+  changeTodoFilter = (newFilter) => {
+    this.todoFilter = newFilter;
+  };
 }
 
 export default viewStore;
