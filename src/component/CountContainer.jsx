@@ -1,32 +1,46 @@
-import { useState } from 'react';
 import {ALL, ACTIVE, COMPLETED} from '../config.js';
 
+function TodoCount(props) {
+  const selected = props.selected;
+  let count;
+
+  if (selected === ALL) {
+    count = props.todoList.length;
+  }
+
+  if (selected === ACTIVE) {
+    count = props.todoList.reduce((acc, cur) => !cur.completed ? ++acc : acc, 0);
+  }
+
+  if (selected === COMPLETED) {
+    count = props.todoList.reduce((acc, cur) => cur.completed ? ++acc : acc, 0);
+  }
+
+  return (
+    <span className="todo-count">
+      총 <strong>{count}</strong> 개
+    </span>
+  )
+}
+
 function CountContainer(props) {
-  const [count, setCount] = useState(props.todoList.length)
   const selected = props.selected;
 
   const onClickAll = (e) => {
     props.onSelectedChange(ALL);
-    setCount(props.todoList.length);
   }
 
   const onClickActive = (e) => {
     props.onSelectedChange(ACTIVE);
-    const count = props.todoList.reduce((acc, cur) => !cur.completed ? ++acc : acc, 0);
-    setCount(count);
   }
 
   const onClickCompleted = (e) => {
     props.onSelectedChange(COMPLETED);
-    const count = props.todoList.reduce((acc, cur) => cur.completed ? ++acc : acc, 0);
-    setCount(count);
   }
 
   return (
       <div className="count-container">
-        <span className="todo-count">
-          총 <strong>{count}</strong> 개
-        </span>
+        <TodoCount todoList={props.todoList} selected={selected}></TodoCount>
         <ul className="filters">
           <li onClick={onClickAll}>
             <span className={'all' + (selected === ALL ? ' selected' : '')}>전체보기</span>
