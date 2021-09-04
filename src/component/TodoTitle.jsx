@@ -34,8 +34,8 @@ function TodoTitle(props) {
 
     const onKeyUp = (e) => {
         if (e.key === Enter) {
-            console.log('1')
             todo.title = editedTitle;
+            todo.completed = false;
             const newTodoList = todoList.map(_todo => _todo.id === parseInt(e.target.id) ? todo : _todo);
             props.value.onTodoListChange(newTodoList);
             e.target.parentElement.className = null;

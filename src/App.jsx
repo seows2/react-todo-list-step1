@@ -1,12 +1,16 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import TodoList from './component/TodoList.jsx';
 import CountContainer from './component/CountContainer.jsx';
 import {Enter} from './config.js';
 
 function App() {
   const [todoTitle, setTodoTitle] = useState('');
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(JSON.parse(localStorage.getItem('todoList')));
   const [selected, setSelected] = useState('ALL');
+
+  useEffect(() => {
+    localStorage.setItem('todoList', JSON.stringify(todoList));
+  }, [todoList]);
 
   const onKeyPress = (e) => {
     if (e.key === Enter) {
@@ -15,7 +19,6 @@ function App() {
         title: todoTitle,
         completed: false,
       }]);
-
       setTodoTitle('');
     }
   
