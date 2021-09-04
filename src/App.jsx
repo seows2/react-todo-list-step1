@@ -6,6 +6,7 @@ import {Enter} from './config.js';
 function App() {
   const [todoTitle, setTodoTitle] = useState('');
   const [todoList, setTodoList] = useState([]);
+  const [selected, setSelected] = useState('ALL');
 
   const onKeyPress = (e) => {
     if (e.key === Enter) {
@@ -13,7 +14,6 @@ function App() {
         id: Date.now(),
         title: todoTitle,
         completed: false,
-        selected: 'ALL',
       }]);
 
       setTodoTitle('');
@@ -26,6 +26,10 @@ function App() {
 
   const onTodoListChange = (todoList) => {
     setTodoList(todoList);
+  }
+
+  const onSelectedChange = (selected) => {
+    setSelected(selected);
   }
 
   return (
@@ -42,8 +46,8 @@ function App() {
       />
       <main>
         <input className="toggle-all" type="checkbox" />
-        <TodoList todoList={todoList} onTodoListChange={onTodoListChange}/>
-        <CountContainer todoList={todoList} onTodoListChange={onTodoListChange}/>
+        <TodoList todoList={todoList} onTodoListChange={onTodoListChange} selected={selected}/>
+        <CountContainer todoList={todoList} onSelectedChange={onSelectedChange} selected={selected}/>
       </main>
     </div>
   );

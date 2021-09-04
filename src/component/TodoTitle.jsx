@@ -1,5 +1,5 @@
 import {useState, useRef} from 'react';
-import {Enter, ESC_KEY_CODE} from '../config.js';
+import {Enter, ESC} from '../config.js';
 
 function TodoTitle(props) {
     const [isEdited, setIsEdited] = useState(false); 
@@ -32,8 +32,9 @@ function TodoTitle(props) {
         setEditedTitle(e.target.value);
     }
 
-    const onKeyDown = (e) => {
+    const onKeyUp = (e) => {
         if (e.key === Enter) {
+            console.log('1')
             todo.title = editedTitle;
             const newTodoList = todoList.map(_todo => _todo.id === parseInt(e.target.id) ? todo : _todo);
             props.value.onTodoListChange(newTodoList);
@@ -41,7 +42,7 @@ function TodoTitle(props) {
             setEditedTitle('')
         }
 
-        if (e.keyCode === ESC_KEY_CODE) {
+        if (e.key === ESC) {
             e.target.parentElement.className = null;
             setIsEdited(!isEdited);
             setEditedTitle('')
@@ -60,7 +61,7 @@ function TodoTitle(props) {
                 <label className="label">{todo.title}</label>
                 <button id={props.id} className="destroy" onClick={handleOnClick}></button>
             </div>
-                <input className="edit" id={props.id} value={editedTitle} onChange={handleChangeEdit} onKeyDown={onKeyDown} ref={editInput}/>
+                <input className="edit" id={props.id} value={editedTitle} onChange={handleChangeEdit} onKeyUp={onKeyUp} ref={editInput}/>
         </li>
     );
 }

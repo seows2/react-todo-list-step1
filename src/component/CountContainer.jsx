@@ -1,32 +1,41 @@
+import { useState } from 'react';
+import {ALL, ACTIVE, COMPLETED} from '../config.js';
+
 function CountContainer(props) {
-  const todoList = props.todoList;
-  
-  const handleChangeAllList = (e) => {
-    
+  const [count, setCount] = useState(props.todoList.length)
+  const selected = props.selected;
+
+  const onClickAll = (e) => {
+    props.onSelectedChange(ALL);
+    setCount(props.todoList.length);
   }
 
-  const handleChangeActiveList = (e) => {
-    const activeList = todoList.filter(_todo => !_todo.completed );
+  const onClickActive = (e) => {
+    props.onSelectedChange(ACTIVE);
+    const count = props.todoList.reduce((acc, cur) => !cur.completed ? ++acc : acc, 0);
+    setCount(count);
   }
 
-  const handleChangeCompletedList = (e) => {
-    const completedList = todoList.filter(_todo => _todo.completed );
+  const onClickCompleted = (e) => {
+    props.onSelectedChange(COMPLETED);
+    const count = props.todoList.reduce((acc, cur) => cur.completed ? ++acc : acc, 0);
+    setCount(count);
   }
 
   return (
       <div className="count-container">
         <span className="todo-count">
-          총 <strong>{todoList.length}</strong> 개
+          총 <strong>{count}</strong> 개
         </span>
         <ul className="filters">
-          <li onClick={handleChangeAllList}>
-            <span className="all selected">전체보기</span>
+          <li onClick={onClickAll}>
+            <span className={'all' + (selected === ALL ? ' selected' : '')}>전체보기</span>
           </li>
-          <li onClick={handleChangeActiveList}>
-            <span className="active">해야할 일</span>
+          <li onClick={onClickActive}>
+            <span className={'all' + (selected === ACTIVE ? ' selected' : '')}>해야할 일</span>
           </li>
-          <li onClick={handleChangeCompletedList}>
-            <span className="completed">완료한 일</span>
+          <li onClick={onClickCompleted}>
+            <span className={'all' + (selected === COMPLETED ? ' selected' : '')}>완료한 일</span>
           </li>
         </ul>
       </div>

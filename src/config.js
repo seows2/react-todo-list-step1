@@ -1,4 +1,7 @@
 const Enter ='Enter';
-const ESC_KEY_CODE = 27;
+const ESC = 'Escape';
+const COMPLETED = 'COMPLETED';
+const ALL = 'ALL';
+const ACTIVE = 'ACTIVE';
 
-export {Enter, ESC_KEY_CODE}
+export {Enter, ESC, COMPLETED, ALL, ACTIVE};
