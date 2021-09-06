@@ -1,4 +1,4 @@
-import {useState, useRef} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import {Enter, ESC} from '../config.js';
 
 function TodoTitle(props) {
@@ -21,12 +21,12 @@ function TodoTitle(props) {
 
     const handleDoubleClick = (e) => {
         setIsEdited(!isEdited);
-
-        if (!isEdited)  {
-            e.currentTarget.className = "editing";
-            editInput.current.focus();
-        }
     }
+
+    useEffect(() => {
+        if (isEdited) editInput.current.focus();
+        setEditedTitle('')
+    }, [isEdited]);
 
     const handleChangeEdit = (e) => {
         setEditedTitle(e.target.value);
@@ -35,22 +35,18 @@ function TodoTitle(props) {
     const onKeyUp = (e) => {
         if (e.key === Enter && editedTitle.length > 0) {
             todo.title = editedTitle;
-            todo.completed = false;
             const newTodoList = todoList.map(_todo => _todo.id === parseInt(e.target.id) ? todo : _todo);
             props.value.onTodoListChange(newTodoList);
-            e.target.parentElement.className = null;
-            setEditedTitle('')
+            setIsEdited(!isEdited);
         }
 
         if (e.key === ESC) {
-            e.target.parentElement.className = todo.completed ? "completed" : null;
             setIsEdited(!isEdited);
-            setEditedTitle('')
         }
     }
 
     return (
-        <li className={todo.completed ? "completed" : null} onDoubleClick={handleDoubleClick}>
+        <li className={isEdited ? "editing" : (todo.completed ? "completed" : null)} onDoubleClick={handleDoubleClick}>
             <div className="view">
                 <input 
                     className="toggle" 
