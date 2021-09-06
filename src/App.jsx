@@ -5,7 +5,7 @@ import {Enter} from './config.js';
 
 function App() {
   const [todoTitle, setTodoTitle] = useState('');
-  const [todoList, setTodoList] = useState(JSON.parse(localStorage.getItem('todoList')));
+  const [todoList, setTodoList] = useState(JSON.parse(localStorage.getItem('todoList')) ?? []);
   const [selected, setSelected] = useState('ALL');
 
   useEffect(() => {
