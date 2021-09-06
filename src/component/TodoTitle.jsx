@@ -33,7 +33,7 @@ function TodoTitle(props) {
     }
 
     const onKeyUp = (e) => {
-        if (e.key === Enter) {
+        if (e.key === Enter && editedTitle.length > 0) {
             todo.title = editedTitle;
             todo.completed = false;
             const newTodoList = todoList.map(_todo => _todo.id === parseInt(e.target.id) ? todo : _todo);
@@ -43,7 +43,7 @@ function TodoTitle(props) {
         }
 
         if (e.key === ESC) {
-            e.target.parentElement.className = null;
+            e.target.parentElement.className = todo.completed ? "completed" : null;
             setIsEdited(!isEdited);
             setEditedTitle('')
         }

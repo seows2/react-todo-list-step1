@@ -13,7 +13,7 @@ function App() {
   }, [todoList]);
 
   const onKeyPress = (e) => {
-    if (e.key === Enter) {
+    if (e.key === Enter && todoTitle.length > 0) {
       setTodoList([...todoList, {
         id: Date.now(),
         title: todoTitle,
