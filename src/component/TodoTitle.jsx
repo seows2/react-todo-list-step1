@@ -1,5 +1,5 @@
 import {useState, useRef, useEffect} from 'react';
-import {Enter, ESC} from '../config.js';
+import {Enter, ESC, ESCAPE} from '../config.js';
 
 function TodoTitle(props) {
     const [isEdited, setIsEdited] = useState(false); 
@@ -40,7 +40,7 @@ function TodoTitle(props) {
             setIsEdited(!isEdited);
         }
 
-        if (e.key === ESC) {
+        if (e.key === ESC || e.key === ESCAPE) {
             setIsEdited(!isEdited);
         }
     }

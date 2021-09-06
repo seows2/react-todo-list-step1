@@ -1,55 +1,27 @@
-import {ALL, ACTIVE, COMPLETED} from '../config.js';
-
-function TodoCount(props) {
-  const selected = props.selected;
-  let count;
-
-  if (selected === ALL) {
-    count = props.todoList.length;
-  }
-
-  if (selected === ACTIVE) {
-    count = props.todoList.reduce((acc, cur) => !cur.completed ? ++acc : acc, 0);
-  }
-
-  if (selected === COMPLETED) {
-    count = props.todoList.reduce((acc, cur) => cur.completed ? ++acc : acc, 0);
-  }
-
-  return (
-    <span className="todo-count">
-      총 <strong>{count}</strong> 개
-    </span>
-  )
-}
+import { ALL, ACTIVE, COMPLETED} from "../config";
 
 function CountContainer(props) {
   const selected = props.selected;
 
-  const onClickAll = (e) => {
-    props.onSelectedChange(ALL);
-  }
-
-  const onClickActive = (e) => {
-    props.onSelectedChange(ACTIVE);
-  }
-
-  const onClickCompleted = (e) => {
-    props.onSelectedChange(COMPLETED);
+  const onClick = (e) => {
+    const filteredName = e.currentTarget.getAttribute('name');
+    props.onSelectedChange(filteredName.toUpperCase());
   }
 
   return (
       <div className="count-container">
-        <TodoCount todoList={props.todoList} selected={selected}></TodoCount>
+        <span className="todo-count">
+          총 <strong>{props.todoList.length}</strong> 개
+        </span>
         <ul className="filters">
-          <li onClick={onClickAll}>
-            <span className={'all' + (selected === ALL ? ' selected' : '')}>전체보기</span>
+          <li name="all" onClick={onClick}>
+            <span className={selected === ALL ? 'all selected' : 'all'}>전체보기</span>
           </li>
-          <li onClick={onClickActive}>
-            <span className={'all' + (selected === ACTIVE ? ' selected' : '')}>해야할 일</span>
+          <li name="active" onClick={onClick}>
+            <span className={selected === ACTIVE ? 'active selected' : 'active'}>해야할 일</span>
           </li>
-          <li onClick={onClickCompleted}>
-            <span className={'all' + (selected === COMPLETED ? ' selected' : '')}>완료한 일</span>
+          <li name="completed" onClick={onClick}>
+            <span className={selected === COMPLETED ? 'completed selected' : 'completed'}>완료한 일</span>
           </li>
         </ul>
       </div>
