@@ -4,7 +4,7 @@ import TodoInput from "./TodoInput";
 import TodoItemList from "./TodoItemList";
 
 const todoApp = ({ todoStore, viewStore }) => {
-  const { addTodo, todos } = todoStore;
+  const { addTodo, activeTodoCount } = todoStore;
   const { todoFilter, changeTodoFilter } = viewStore;
 
   return (
@@ -14,7 +14,7 @@ const todoApp = ({ todoStore, viewStore }) => {
       <main>
         <TodoItemList todoStore={todoStore} todoFilter={todoFilter} />
         <TodoFooter
-          todos={todos}
+          activeTodoCount={activeTodoCount}
           todoFilter={todoFilter}
           changeTodoFilter={changeTodoFilter}
         />

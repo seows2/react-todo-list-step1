@@ -1,5 +1,5 @@
 import { action, makeObservable, observable } from "mobx";
-import { TODO_PROPERTY } from "../constants";
+import { FILTER, TODO_PROPERTY } from "../constants";
 import { getTodos, setTodo } from "../localStorage";
 
 class todoStore {
@@ -39,6 +39,19 @@ class todoStore {
   removeTodo = (id) => {
     this.todos = this.todos.filter((todo) => todo.id !== id);
     setTodo(this.todos);
+  };
+
+  activeTodoCount = (todoFilter) => {
+    const _filterCompleted = () => this.todos.filter((todo) => todo.completed);
+    const _filterActive = () => this.todos.filter((todo) => !todo.completed);
+
+    const callback = {
+      [FILTER.COMPLETED]: _filterCompleted,
+      [FILTER.ACTIVE]: _filterActive,
+    }[todoFilter];
+
+    if (!callback) return this.todos.length;
+    return callback().length;
   };
 }
 

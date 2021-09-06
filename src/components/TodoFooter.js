@@ -1,7 +1,8 @@
+import { computed } from "mobx";
 import { observer } from "mobx-react";
 import { FILTER } from "../constants";
 
-const TodoFooter = ({ todos, todoFilter, changeTodoFilter }) => {
+const TodoFooter = ({ todoFilter, changeTodoFilter, activeTodoCount }) => {
   const _setClassNameByFilter = (origin) => {
     return [origin, todoFilter === origin ? "selected" : ""].join(" ");
   };
@@ -11,23 +12,12 @@ const TodoFooter = ({ todos, todoFilter, changeTodoFilter }) => {
     changeTodoFilter(filter);
   };
 
-  const activeTodoCount = () => {
-    const _filterCompleted = () => todos.filter((todo) => todo.completed);
-    const _filterActive = () => todos.filter((todo) => !todo.completed);
-
-    const callback = {
-      [FILTER.COMPLETED]: _filterCompleted,
-      [FILTER.ACTIVE]: _filterActive,
-    }[todoFilter];
-
-    if (!callback) return todos.length;
-    return callback().length;
-  };
+  const count = computed(() => activeTodoCount(todoFilter)).get();
 
   return (
     <div className="count-container">
       <span className="todo-count">
-        총 <strong>{activeTodoCount()}</strong> 개
+        총 <strong>{count}</strong> 개
       </span>
       <ul className="filters">
         <li>

@@ -5,9 +5,10 @@ const TodoInput = ({ addTodo }) => {
     if (key === KEY.ENTER) {
       const contents = target.value.trim();
 
-      if (contents.length <= 0) return (target.value = "");
+      if (contents.length > 0) {
+        addTodo(contents);
+      }
 
-      addTodo(contents);
       target.value = "";
     }
   };

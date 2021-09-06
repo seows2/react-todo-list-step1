@@ -6,13 +6,14 @@ const TodoItemList = ({ todoStore, todoFilter }) => {
   const { todos, removeTodo, toggleTodo, editTodoContent } = todoStore;
 
   const getVisibleTodos = () =>
-    todos.filter((todo) => {
-      return {
-        [FILTER.ACTIVE]: !todo.completed,
-        [FILTER.COMPLETED]: todo.completed,
-        [FILTER.ALL]: true,
-      }[todoFilter];
-    });
+    todos.filter(
+      (todo) =>
+        ({
+          [FILTER.ACTIVE]: !todo.completed,
+          [FILTER.COMPLETED]: todo.completed,
+          [FILTER.ALL]: true,
+        }[todoFilter])
+    );
 
   return (
     <ul id="todo-list" className="todo-list">

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { observer } from "mobx-react";
+import { useState } from "react";
 import { KEY } from "../constants";
 
 const TodoItem = ({
@@ -65,4 +66,4 @@ const TodoItem = ({
   );
 };
 
-export default React.memo(TodoItem);
+export default observer(TodoItem);
