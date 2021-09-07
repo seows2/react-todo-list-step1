@@ -2,7 +2,14 @@ import { ALL, ACTIVE, COMPLETED} from "../config";
 
 function CountContainer(props) {
   const selected = props.selected;
-
+  const selectedTodo = props.todoList
+    .filter(_todo =>
+        ({
+            'ALL': _todo,
+            'ACTIVE': !_todo.completed,
+            'COMPLETED': _todo.completed,
+        }[props.selected])
+    )
   const onClick = (e) => {
     const filteredName = e.currentTarget.getAttribute('name');
     props.onSelectedChange(filteredName.toUpperCase());
@@ -11,7 +18,7 @@ function CountContainer(props) {
   return (
       <div className="count-container">
         <span className="todo-count">
-          총 <strong>{props.todoList.length}</strong> 개
+          총 <strong>{selectedTodo.length}</strong> 개
         </span>
         <ul className="filters">
           <li name="all" onClick={onClick}>

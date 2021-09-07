@@ -12,17 +12,6 @@ function App() {
     localStorage.setItem('todoList', JSON.stringify(todoList));
   }, [todoList]);
 
-  const selectedTodoList = () => {
-    return todoList
-      .filter(_todo =>
-          ({
-              'ALL': _todo,
-              'ACTIVE': !_todo.completed,
-              'COMPLETED': _todo.completed,
-          }[selected])
-      )
-  }
-
   const onKeyPress = (e) => {
     if (e.key === Enter && todoTitle.length > 0) {
       setTodoList([...todoList, {
@@ -60,8 +49,8 @@ function App() {
       />
       <main>
         <input className="toggle-all" type="checkbox" />
-        <TodoList todoList={selectedTodoList()} onTodoListChange={onTodoListChange} selected={selected}/>
-        <CountContainer todoList={selectedTodoList()} onSelectedChange={onSelectedChange} selected={selected}/>
+        <TodoList todoList={todoList} onTodoListChange={onTodoListChange} selected={selected}/>
+        <CountContainer todoList={todoList} onSelectedChange={onSelectedChange} selected={selected}/>
       </main>
     </div>
   );
