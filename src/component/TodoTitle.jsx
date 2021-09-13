@@ -2,21 +2,21 @@ import {useState, useRef, useEffect} from 'react';
 import {Enter, ESC, ESCAPE} from '../config.js';
 
 function TodoTitle(props) {
+    const {id, value: {todoList, onTodoListChange}} = props;
     const [isEdited, setIsEdited] = useState(false); 
     const [editedTitle, setEditedTitle ] = useState('');
-    const todoList = props.value.todoList;
-    const todo = todoList.filter(_todo => _todo.id === props.id)[0];
+    const todo = todoList.filter(_todo => _todo.id === id)[0];
     const editInput = useRef(null);
     
     const handleChange = (e) => {
         todo.completed = !todo.completed;
-        const newTodoList = todoList.map(_todo => _todo.id === props.id ? todo : _todo);
-        props.value.onTodoListChange(newTodoList);
+        const newTodoList = todoList.map(_todo => _todo.id === id ? todo : _todo);
+        onTodoListChange(newTodoList);
     }
 
     const handleOnClick = (e) => {
         const newTodoList = todoList.filter(_todo => _todo.id !== parseInt(e.target.id));
-        props.value.onTodoListChange(newTodoList);
+        onTodoListChange(newTodoList);
     }
 
     const handleDoubleClick = (e) => {
@@ -36,7 +36,7 @@ function TodoTitle(props) {
         if (e.key === Enter && editedTitle.length > 0) {
             todo.title = editedTitle;
             const newTodoList = todoList.map(_todo => _todo.id === parseInt(e.target.id) ? todo : _todo);
-            props.value.onTodoListChange(newTodoList);
+            onTodoListChange(newTodoList);
             setIsEdited(!isEdited);
         }
 
@@ -55,9 +55,9 @@ function TodoTitle(props) {
                     checked={todo.completed}
                 />
                 <label className="label">{todo.title}</label>
-                <button id={props.id} className="destroy" onClick={handleOnClick}></button>
+                <button id={id} className="destroy" onClick={handleOnClick}></button>
             </div>
-                <input className="edit" id={props.id} value={editedTitle} onChange={handleChangeEdit} onKeyUp={onKeyUp} ref={editInput}/>
+                <input className="edit" id={id} value={editedTitle} onChange={handleChangeEdit} onKeyUp={onKeyUp} ref={editInput}/>
         </li>
     );
 }

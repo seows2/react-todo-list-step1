@@ -1,13 +1,14 @@
 import TodoTitle from "./TodoTitle";
 
 function TodoList(props) {
-    const selectedTodo = props.todoList
+    const {todoList, selected} = props;
+    const selectedTodo = todoList
         .filter(_todo =>
             ({
                 'ALL': _todo,
                 'ACTIVE': !_todo.completed,
                 'COMPLETED': _todo.completed,
-            }[props.selected])
+            }[selected])
         )
 
     return (

@@ -1,18 +1,18 @@
 import { ALL, ACTIVE, COMPLETED} from "../config";
 
 function CountContainer(props) {
-  const selected = props.selected;
-  const selectedTodo = props.todoList
+  const {selected, todoList, onSelectedChange} = props;
+  const selectedTodo = todoList
     .filter(_todo =>
         ({
             'ALL': _todo,
             'ACTIVE': !_todo.completed,
             'COMPLETED': _todo.completed,
-        }[props.selected])
+        }[selected])
     )
   const onClick = (e) => {
     const filteredName = e.currentTarget.getAttribute('name');
-    props.onSelectedChange(filteredName.toUpperCase());
+    onSelectedChange(filteredName.toUpperCase());
   }
 
   return (
