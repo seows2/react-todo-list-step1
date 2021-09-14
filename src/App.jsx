@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import TodoList from './component/TodoList.jsx';
 import CountContainer from './component/CountContainer.jsx';
 import {Enter} from './config.js';
@@ -21,16 +21,16 @@ function App() {
       }]);
       setTodoTitle('');
     }
-  
   }
-  const handleChange = (e) => {
+
+  const handleChangeTodo = (e) => {
     setTodoTitle(e.target.value);
   }
 
-  const onTodoListChange = (todoList) => {
+  const handleChangeTodoList = useCallback((todoList) => {
     setTodoList(todoList);
-  }
-
+  }, []);
+  
   const onSelectedChange = (selected) => {
     setSelected(selected);
   }
@@ -43,13 +43,13 @@ function App() {
         className="new-todo"
         placeholder="할일을 추가해주세요"
         value={todoTitle}
-        onChange={handleChange}
+        onChange={handleChangeTodo}
         onKeyPress={onKeyPress}
         autoFocus
       />
       <main>
         <input className="toggle-all" type="checkbox" />
-        <TodoList todoList={todoList} onTodoListChange={onTodoListChange} selected={selected}/>
+        <TodoList todoList={todoList} onTodoListChange={handleChangeTodoList} selected={selected}/>
         <CountContainer todoList={todoList} onSelectedChange={onSelectedChange} selected={selected}/>
       </main>
     </div>
