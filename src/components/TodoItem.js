@@ -1,6 +1,6 @@
-import { observer } from "mobx-react";
-import { useState } from "react";
-import { KEY } from "../constants";
+import { observer } from 'mobx-react';
+import { useState } from 'react';
+import { KEY } from '../constants';
 
 const TodoItem = ({
   id,
@@ -40,8 +40,8 @@ const TodoItem = ({
 
   return (
     <li
-      className={[completed ? "completed" : "", isEdit ? "editing" : ""].join(
-        " "
+      className={[completed ? 'completed' : '', isEdit ? 'editing' : ''].join(
+        ' '
       )}
     >
       <div className="view">

@@ -1,9 +1,9 @@
-import { action, makeObservable, observable } from "mobx";
-import { FILTER, TODO_PROPERTY } from "../constants";
-import { getTodos, setTodo } from "../localStorage";
+import { action, makeObservable, observable } from 'mobx';
+import { FILTER, TODO_PROPERTY } from '../constants';
+import { getTodos, setTodo } from '../localStorage';
 
 class todoStore {
-  @observable
+  @observable.ref
   todos = getTodos();
 
   constructor() {
@@ -12,26 +12,32 @@ class todoStore {
 
   @action
   addTodo = (contents) => {
-    this.todos.push({
-      id: Date.now(),
-      contents,
-      completed: false,
-    });
-
+    this.todos = [
+      ...this.todos,
+      { id: Date.now(), contents, completed: false },
+    ];
     setTodo(this.todos);
   };
 
   @action
   editTodoContent = (id, contents) => {
-    const target = this.todos.find((todo) => todo.id === id);
-    target[TODO_PROPERTY.CONTENTS] = contents;
+    this.todos = this.todos.map((todo) => {
+      if (todo.id === id) {
+        todo[TODO_PROPERTY.CONTENTS] = contents;
+      }
+      return todo;
+    });
     setTodo(this.todos);
   };
 
   @action
   toggleTodo = (id) => {
-    const target = this.todos.find((todo) => todo.id === id);
-    target[TODO_PROPERTY.COMPLETED] = !target[TODO_PROPERTY.COMPLETED];
+    this.todos = this.todos.map((todo) => {
+      if (todo.id === id) {
+        todo[TODO_PROPERTY.COMPLETED] = !todo[TODO_PROPERTY.COMPLETED];
+      }
+      return todo;
+    });
     setTodo(this.todos);
   };
 
@@ -55,4 +61,4 @@ class todoStore {
   };
 }
 
-export default todoStore;
+export default new todoStore();

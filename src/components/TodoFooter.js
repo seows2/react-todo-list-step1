@@ -1,14 +1,14 @@
-import { computed } from "mobx";
-import { observer } from "mobx-react";
-import { FILTER } from "../constants";
+import { computed } from 'mobx';
+import { observer } from 'mobx-react';
+import { FILTER } from '../constants';
 
 const TodoFooter = ({ todoFilter, changeTodoFilter, activeTodoCount }) => {
   const _setClassNameByFilter = (origin) => {
-    return [origin, todoFilter === origin ? "selected" : ""].join(" ");
+    return [origin, todoFilter === origin ? 'selected' : ''].join(' ');
   };
 
   const handleClick = (event) => {
-    const filter = event.target.className.split(" ")[0];
+    const filter = event.target.className.split(' ')[0];
     changeTodoFilter(filter);
   };
 

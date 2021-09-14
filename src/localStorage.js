@@ -1,9 +1,9 @@
-const TODOS = "todos";
+const TODOS = 'todos';
 
 const getTodos = () => {
   const value = localStorage.getItem(TODOS);
 
-  return !value ? [] : JSON.parse(value);
+  return JSON.parse(value) ?? [];
 };
 
 const setTodo = (value) => {

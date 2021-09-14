@@ -1,10 +1,10 @@
-const ENTER = "Enter";
-const ESCAPE = "Escape";
-const ESC = "Esc";
-const ALL = "all";
-const ACTIVE = "active";
-const COMPLETED = "completed";
-const CONTENTS = "contents";
+const ENTER = 'Enter';
+const ESCAPE = 'Escape';
+const ESC = 'Esc';
+const ALL = 'all';
+const ACTIVE = 'active';
+const COMPLETED = 'completed';
+const CONTENTS = 'contents';
 
 const TODO_PROPERTY = {
   COMPLETED,

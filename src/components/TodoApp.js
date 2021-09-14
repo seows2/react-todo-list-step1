@@ -1,7 +1,7 @@
-import { inject, observer } from "mobx-react";
-import TodoFooter from "./TodoFooter";
-import TodoInput from "./TodoInput";
-import TodoItemList from "./TodoItemList";
+import { inject, observer } from 'mobx-react';
+import TodoFooter from './TodoFooter';
+import TodoInput from './TodoInput';
+import TodoItemList from './TodoItemList';
 
 const todoApp = ({ todoStore, viewStore }) => {
   const { addTodo, activeTodoCount } = todoStore;
@@ -23,4 +23,4 @@ const todoApp = ({ todoStore, viewStore }) => {
   );
 };
 
-export default inject("todoStore", "viewStore")(observer(todoApp));
+export default inject('todoStore', 'viewStore')(observer(todoApp));

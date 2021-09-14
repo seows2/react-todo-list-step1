@@ -1,8 +1,8 @@
-import { action, makeObservable, observable } from "mobx";
-import { FILTER } from "../constants";
+import { action, makeObservable, observable } from 'mobx';
+import { FILTER } from '../constants';
 
 class viewStore {
-  @observable todoFilter = FILTER.ALL;
+  @observable.ref todoFilter = FILTER.ALL;
 
   constructor() {
     makeObservable(this);
@@ -14,4 +14,4 @@ class viewStore {
   };
 }
 
-export default viewStore;
+export default new viewStore();

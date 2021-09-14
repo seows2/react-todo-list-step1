@@ -1,6 +1,6 @@
-import { observer } from "mobx-react";
-import { FILTER } from "../constants";
-import TodoItem from "./TodoItem";
+import { observer } from 'mobx-react';
+import { FILTER } from '../constants';
+import TodoItem from './TodoItem';
 
 const TodoItemList = ({ todoStore, todoFilter }) => {
   const { todos, removeTodo, toggleTodo, editTodoContent } = todoStore;

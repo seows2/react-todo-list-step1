@@ -1,4 +1,4 @@
-import { KEY } from "../constants";
+import { KEY } from '../constants';
 
 const TodoInput = ({ addTodo }) => {
   const handleKeyDown = ({ key, target }) => {
@@ -9,7 +9,7 @@ const TodoInput = ({ addTodo }) => {
         addTodo(contents);
       }
 
-      target.value = "";
+      target.value = '';
     }
   };
 
