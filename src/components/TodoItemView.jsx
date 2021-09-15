@@ -1,6 +1,7 @@
 import { observer, useLocalObservable } from "mobx-react-lite";
 import { useContext, useRef } from "react";
 import { TodoListContext } from "./TodoApp";
+import { eventkey } from "../constants";
 
 const TodoItemView = observer(({ todo }) => {
   const { todoStore } = useContext(TodoListContext);
@@ -24,7 +25,7 @@ const TodoItemView = observer(({ todo }) => {
   }));
 
   const toggleCheckBox = () => {
-    todoStore.completeTodo(todo);
+    todoStore.changeComplete(todo);
     listEle.current.className = todo.completed ? "completed" : "";
   };
 
@@ -37,13 +38,12 @@ const TodoItemView = observer(({ todo }) => {
   };
 
   const handleKeyUp = e => {
-    if (e.key === "Enter" && editedTodo.title.trims().length > 0) {
-      todo.title = editedTodo.title;
-      todoStore.editTodo(todo);
+    if (e.key === eventkey.ENTER && editedTodo.title.trim().length > 0) {
+      todoStore.changeTitle(todo, editedTodo);
       editedTodo.toggle();
     }
 
-    if (e.key === "Esc" || e.key === "Escape") {
+    if (e.key === eventkey.ESC || e.key === eventkey.ESCAPE) {
       editedTodo.toggle();
     }
   };

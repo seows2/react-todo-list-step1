@@ -1,6 +1,7 @@
 import { observer, useLocalObservable } from "mobx-react-lite";
 import { useContext } from "react";
 import { TodoListContext } from "./TodoApp";
+import { eventkey } from "../constants";
 
 const TodoTypingView = observer(() => {
   const { todoStore } = useContext(TodoListContext);
@@ -16,7 +17,7 @@ const TodoTypingView = observer(() => {
   }));
 
   const onKeyPress = e => {
-    if (e.key === "Enter" && todo.title.trim().length > 0) {
+    if (e.key === eventkey.ENTER && todo.title.trim().length > 0) {
       todoStore.addTodo(todo.title);
       todo.initTitle();
     }
